@@ -21977,6 +21977,27 @@ Transform:
   - {fileID: 100006769}
   - {fileID: 100006797}
   - {fileID: 100006818}
+  - {fileID: 100007003}
+  - {fileID: 100007005}
+  - {fileID: 100007009}
+  - {fileID: 100007011}
+  - {fileID: 100007013}
+  - {fileID: 100007017}
+  - {fileID: 100007019}
+  - {fileID: 100007023}
+  - {fileID: 100007025}
+  - {fileID: 100007027}
+  - {fileID: 100007031}
+  - {fileID: 100007033}
+  - {fileID: 100007037}
+  - {fileID: 100007039}
+  - {fileID: 100007041}
+  - {fileID: 100007045}
+  - {fileID: 100007047}
+  - {fileID: 100007051}
+  - {fileID: 100007053}
+  - {fileID: 100007055}
+  - {fileID: 100007059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100006832
@@ -23166,3 +23187,1473 @@ SceneRoots:
   - {fileID: 100006930}
   - {fileID: 100006860}
   - {fileID: 100006881}
+--- !u!1001 &100007002
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.130526
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.991445
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000006, type: 3}
+--- !u!4 &100007003 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+  m_PrefabInstance: {fileID: 100007002}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007004
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.173648
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.984808
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000006, type: 3}
+--- !u!4 &100007005 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000006, type: 3}
+  m_PrefabInstance: {fileID: 100007004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef000000000000000000000000000d, type: 3}
+--- !u!4 &100007009 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef000000000000000000000000000d, type: 3}
+  m_PrefabInstance: {fileID: 100007008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000007, type: 3}
+--- !u!4 &100007011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+  m_PrefabInstance: {fileID: 100007010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007012
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.85
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000007, type: 3}
+--- !u!4 &100007013 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+  m_PrefabInstance: {fileID: 100007012}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007016
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000007, type: 3}
+--- !u!4 &100007017 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+  m_PrefabInstance: {fileID: 100007016}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007018
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000007, type: 3}
+--- !u!4 &100007019 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+  m_PrefabInstance: {fileID: 100007018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007022
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.85
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000007, type: 3}
+--- !u!4 &100007023 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+  m_PrefabInstance: {fileID: 100007022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007024
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000007, type: 3}
+--- !u!4 &100007025 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000007, type: 3}
+  m_PrefabInstance: {fileID: 100007024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007026
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.573576
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.819152
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000008, type: 3}
+--- !u!4 &100007027 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+  m_PrefabInstance: {fileID: 100007026}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007030
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.34202
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.939693
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000008, type: 3}
+--- !u!4 &100007031 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+  m_PrefabInstance: {fileID: 100007030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007032
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.21644
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.976296
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000008, type: 3}
+--- !u!4 &100007033 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000008, type: 3}
+  m_PrefabInstance: {fileID: 100007032}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007036
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.173648
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.984808
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000009, type: 3}
+--- !u!4 &100007037 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+  m_PrefabInstance: {fileID: 100007036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007038
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.21644
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.976296
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000009, type: 3}
+--- !u!4 &100007039 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+  m_PrefabInstance: {fileID: 100007038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007040
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000009, type: 3}
+--- !u!4 &100007041 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+  m_PrefabInstance: {fileID: 100007040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007044
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.087156
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.996195
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000009, type: 3}
+--- !u!4 &100007045 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+  m_PrefabInstance: {fileID: 100007044}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007046
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.130526
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.991445
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000009, type: 3}
+--- !u!4 &100007047 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+  m_PrefabInstance: {fileID: 100007046}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007050
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.258819
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.965926
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000009, type: 3}
+--- !u!4 &100007051 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+  m_PrefabInstance: {fileID: 100007050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007052
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000009, type: 3}
+--- !u!4 &100007053 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+  m_PrefabInstance: {fileID: 100007052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007054
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.130526
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.991445
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000009, type: 3}
+--- !u!4 &100007055 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+  m_PrefabInstance: {fileID: 100007054}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &100007058
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100000119}
+    m_Modifications:
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.087156
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.996195
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef0000000000000000000000000009, type: 3}
+--- !u!4 &100007059 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 100001, guid: beef0000000000000000000000000009, type: 3}
+  m_PrefabInstance: {fileID: 100007058}
+  m_PrefabAsset: {fileID: 0}
