@@ -12,6 +12,8 @@ public sealed class SerialGameInput : IGameInput, IDisposable
     private string pending = string.Empty;
     private ControllerState latest;
     private bool disposed;
+    private Vector2 previousTilt;
+    private bool hasPreviousTilt;
     public bool IsAvailable => port != null && port.IsOpen && !disposed;
 
     public SerialGameInput(string portName)
@@ -46,7 +48,7 @@ public sealed class SerialGameInput : IGameInput, IDisposable
                     break;
                 }
 
-                Parse(pending.Substring(start + 1, end - start - 1));
+                Parse(pending.Substring(start + 1, end - start - 1), deltaTime);
                 pending = pending.Substring(end + 1);
             }
             if (pending.IndexOf(StartMarker, StringComparison.Ordinal) < 0) pending = string.Empty;
@@ -61,7 +63,7 @@ public sealed class SerialGameInput : IGameInput, IDisposable
         return result;
     }
 
-    private void Parse(string payload)
+    private void Parse(string payload, float deltaTime)
     {
         // S,deltaDegrees,speedDegreesPerSecond,direction,tiltX,tiltY,shake,E
         string[] fields = payload.Split(',');
@@ -75,6 +77,14 @@ public sealed class SerialGameInput : IGameInput, IDisposable
 
         latest.RotationDeltaDegrees += delta;
         latest.Shaken |= shake != 0;
+        float tiltChangeRate = hasPreviousTilt && deltaTime > 0f
+            ? (new Vector2(tiltX, tiltY) - previousTilt).magnitude / deltaTime
+            : 0f;
+        float derivedShake = Mathf.Clamp01(tiltChangeRate / GameTuning.SerialTiltChangeNormalization);
+        latest.ShakeIntensity = Mathf.Max(latest.ShakeIntensity, derivedShake,
+            shake != 0 ? GameTuning.SerialShakeFlagIntensity : 0f);
+        previousTilt = new Vector2(tiltX, tiltY);
+        hasPreviousTilt = true;
         if (delta != 0f)
         {
             latest.RotationSpeedDegreesPerSecond = Mathf.Max(latest.RotationSpeedDegreesPerSecond, speed);

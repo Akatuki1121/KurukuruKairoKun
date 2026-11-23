@@ -24,20 +24,19 @@ public sealed class KairoGame : MonoBehaviour
     private System.Collections.Generic.List<Transform>[] circuitLegs;
     private readonly bool[] nodeCompleted = new bool[GameTuning.SpinNodeCount];
     private bool goalOpen;
-    private Transform[] chargeParticles;
     private Renderer ballRenderer;
     private Material ballMaterial;
     private TextMeshProUGUI instruction;
     private TextMeshProUGUI status;
     private Image chargeBar;
+    private Image sleepBar;
+    private TextMeshProUGUI sleepText;
     private Image spinBar;
     private GameObject spinBarRoot;
     private Transform cameraTransform;
-    private float pickupFlashUntil;
     private Transform currentMarker;
     private Transform sliderBlock;
     private float gameStartTime;
-    private int collectedCount;
     private AudioSource audioSource;
     private AudioClip spinTone;
     private AudioClip successTone;
@@ -47,7 +46,11 @@ public sealed class KairoGame : MonoBehaviour
     private float spinCommandTimer;
     private float progress;
     private float charge;
-    private float jumpVelocity;
+    private float sleepDepth;
+    private float awakeTimer;
+    private bool sleepEnabled;
+    private bool awake;
+    private float shakeIntensity;
     private float flashUntil;
     private float lastPitchUpdate;
 
@@ -105,11 +108,10 @@ public sealed class KairoGame : MonoBehaviour
             if (circuitLegs[i].Count == 0) { Debug.LogError($"束ね失敗: Circuit {i + 1} が見つかりません"); return false; }
         }
 
-        chargeParticles = new Transform[GameTuning.ChargeParticlePositions.Length];
-        for (int i = 0; i < chargeParticles.Length; i++)
-            chargeParticles[i] = FindChild(root, "Charge particle " + (i + 1));
-
         currentMarker = FindChild(root, "Current marker");
+        sleepText = FindChild(root, "SleepText")?.GetComponent<TextMeshProUGUI>();
+        if (sleepText == null)
+            sleepText = GameObject.Find("SleepText")?.GetComponent<TextMeshProUGUI>();
         sliderBlock = FindChild(root, "Slider block");
         ballRenderer = ball.GetComponentInChildren<Renderer>();
         if (ballRenderer != null)
@@ -145,6 +147,7 @@ public sealed class KairoGame : MonoBehaviour
         foreach (Image image in hud.GetComponentsInChildren<Image>(true))
         {
             if (image.name == "ChargeBar") chargeBar = image;
+            else if (image.name == "SleepBar") sleepBar = image;
             else if (image.name == "SpinBar") spinBar = image;
             else if (image.name == "SpinBarBG") spinBarRoot = image.gameObject;
         }
@@ -201,6 +204,7 @@ public sealed class KairoGame : MonoBehaviour
             }
         }
         UpdateBallChargeVisual();
+        UpdateSleepVisual();
         UpdateStatus();
         UpdateAnimator(input);
         UpdateCamera(deltaTime);
@@ -224,8 +228,8 @@ public sealed class KairoGame : MonoBehaviour
     {
         if (haraAnimator == null) return;
         float tiltMagnitude = Mathf.Max(Mathf.Abs(input.Tilt.x), Mathf.Abs(input.Tilt.y));
-        float moveAmount = phase == Phase.Carrying
-            ? Mathf.InverseLerp(GameTuning.TiltDeadZone, 1f, tiltMagnitude)
+        float moveAmount = phase == Phase.Carrying && (!sleepEnabled || !awake || awakeTimer <= 0f)
+            ? Mathf.InverseLerp(GameTuning.TiltDeadZone, GameTuning.CarryMaximumTilt, tiltMagnitude)
             : 0f;
         haraAnimator.SetFloat("Speed", moveAmount, 0.1f, Time.deltaTime);
         haraAnimator.SetBool("IsCarrying", phase == Phase.Carrying);
@@ -242,12 +246,27 @@ public sealed class KairoGame : MonoBehaviour
             sp.z = GameTuning.SliderCenterZ + GameTuning.SliderDirZ * slide;
             sliderBlock.position = sp;
         }
+
+        Vector2 tilt = input.Tilt;
+        float tiltMagnitude = tilt.magnitude;
+        Vector2 moveDirection = tiltMagnitude > GameTuning.TiltDeadZone ? tilt.normalized : Vector2.zero;
+        float moveScale = tiltMagnitude <= GameTuning.TiltDeadZone
+            ? 0f
+            : Mathf.Clamp01((tiltMagnitude - GameTuning.TiltDeadZone) /
+                (GameTuning.CarryMaximumTilt - GameTuning.TiltDeadZone));
+        bool canMove = !sleepEnabled || !awake || awakeTimer <= 0f;
+        if (sleepEnabled && awake && awakeTimer > 0f)
+        {
+            awakeTimer = Mathf.Max(0f, awakeTimer - deltaTime);
+            canMove = false;
+        }
+        if (!canMove) moveScale = 0f;
+
         Vector3 position = hara.position;
-        float horizontalTilt = Mathf.Abs(input.Tilt.x) >= GameTuning.TiltDeadZone ? input.Tilt.x : 0f;
-        float verticalTilt = Mathf.Abs(input.Tilt.y) >= GameTuning.TiltDeadZone ? input.Tilt.y : 0f;
         Vector3 beforeMove = position;
-        position.x += horizontalTilt * GameTuning.CharacterMoveSpeed * deltaTime;
-        position.z += verticalTilt * GameTuning.CharacterMoveSpeed * deltaTime;
+        float moveSpeed = GameTuning.CarryMaximumSpeed * moveScale;
+        position.x += moveDirection.x * moveSpeed * deltaTime;
+        position.z += moveDirection.y * moveSpeed * deltaTime;
         if (!InsideWalkArea(position))
         {
             Vector3 tryX = beforeMove;
@@ -263,76 +282,130 @@ public sealed class KairoGame : MonoBehaviour
         ResolveObstacles(ref position);
 
         float groundY = GroundHeightAt(position.x, position.z);
-        bool grounded = position.y <= groundY + GameTuning.InputDeadZone;
-        if (input.Shaken && grounded)
-        {
-            jumpVelocity = GameTuning.JumpVelocity;
-            grounded = false;
-            if (haraAnimator != null) haraAnimator.SetTrigger("Jump");
-        }
-        if (!grounded)
-        {
-            jumpVelocity -= GameTuning.Gravity * deltaTime;
-            position.y += jumpVelocity * deltaTime;
-            if (position.y <= groundY)
-            {
-                position.y = groundY;
-                jumpVelocity = 0f;
-            }
-        }
-        else
-        {
-            position.y = groundY;
-        }
+        position.y = groundY;
         hara.position = position;
-        // 進む向きへ少しだけ体を傾ける。
-        Quaternion leanTarget = Quaternion.Euler(verticalTilt * 8f, 0f, -horizontalTilt * 10f);
-        hara.rotation = Quaternion.Slerp(hara.rotation, leanTarget, 1f - Mathf.Exp(-10f * deltaTime));
-        Vector3 carryTarget = hara.position + Vector3.right * 0.65f + Vector3.up * 0.7f;
-        ball.position = Vector3.Lerp(ball.position, carryTarget, 1f - Mathf.Exp(-14f * deltaTime));
+        Quaternion leanTarget = Quaternion.Euler(moveDirection.y * GameTuning.CarryLeanDegrees,
+            0f, -moveDirection.x * GameTuning.CarryLeanDegrees);
+        hara.rotation = Quaternion.Slerp(hara.rotation, leanTarget,
+            1f - Mathf.Exp(-GameTuning.CarryLeanResponse * deltaTime));
 
-        bool moving = Mathf.Abs(horizontalTilt) >= GameTuning.TiltDeadZone ||
-                      Mathf.Abs(verticalTilt) >= GameTuning.TiltDeadZone;
-        bool onBeat = IsOnBeat();
-        if (moving)
+        shakeIntensity = CalculateShakeIntensity(moveSpeed, position, input);
+        float sleepRatio = sleepEnabled && !awake ? sleepDepth / GameTuning.SleepMaximum : 0f;
+        Vector3 carryTarget = hara.position + Vector3.right * GameTuning.BallCarryOffsetX +
+            Vector3.up * (GameTuning.BallCarryOffsetY + Mathf.Sin(Time.time * GameTuning.BallSleepBobFrequency) *
+                GameTuning.BallSleepBobAmplitude * sleepRatio);
+        ball.position = Vector3.Lerp(ball.position, carryTarget,
+            1f - Mathf.Exp(-GameTuning.BallCarryFollowRate * deltaTime));
+        if (sleepEnabled)
         {
-            AddCharge(GameTuning.ChargeRate * deltaTime);
-            if (onBeat) AddCharge(GameTuning.BeatChargeRate * deltaTime);
+            float wobble = shakeIntensity * GameTuning.BallShakeVisualDegrees;
+            ball.rotation = Quaternion.Slerp(ball.rotation,
+                Quaternion.Euler(wobble, 0f, wobble), 1f - Mathf.Exp(-GameTuning.BallShakeVisualResponse * deltaTime));
         }
-        // 加速帯: 配線の上にいる間、その向きへ押し出される。充電も少し増える。
-        for (int i = 0; i < GameTuning.BoostCenterX.Length; i++)
-        {
-            float bdx = position.x - GameTuning.BoostCenterX[i];
-            float bdz = position.z - GameTuning.BoostCenterZ[i];
-            float along = bdx * GameTuning.BoostDirX[i] + bdz * GameTuning.BoostDirZ[i];
-            float side = bdx * -GameTuning.BoostDirZ[i] + bdz * GameTuning.BoostDirX[i];
-            if (Mathf.Abs(along) <= GameTuning.BoostHalfLength && Mathf.Abs(side) <= GameTuning.BoostHalfWidth)
-            {
-                position.x += GameTuning.BoostDirX[i] * GameTuning.BoostSpeed * deltaTime;
-                position.z += GameTuning.BoostDirZ[i] * GameTuning.BoostSpeed * deltaTime;
-                hara.position = position;
-                AddCharge(GameTuning.ChargeRate * 2f * deltaTime);
-            }
-        }
-        CollectChargeParticles();
+
+        UpdateSleep(input, deltaTime, shakeIntensity);
+
+        // 加速帯と粒は残すが、運搬の自動移動および帯電加算源としては無効化する。
+
         if (goalOpen)
         {
             Vector2 goalDelta = new Vector2(GameTuning.GoalX - position.x, GameTuning.GoalZ - position.z);
-            if (goalDelta.magnitude <= 0.75f) FinishGame();
+            if (goalDelta.magnitude <= GameTuning.GoalArrivalDistance) FinishGame();
             return;
         }
 
-        Vector2 target = new Vector2(docks[nodeIndex].position.x + 0.85f * GameTuning.ArrivalSide[nodeIndex],
+        Vector2 target = new Vector2(docks[nodeIndex].position.x + GameTuning.DockArrivalOffsetX * GameTuning.ArrivalSide[nodeIndex],
             docks[nodeIndex].position.z);
         Vector2 flat = new Vector2(hara.position.x, hara.position.z);
-        if (!nodeCompleted[nodeIndex] && grounded && Vector2.Distance(flat, target) <= GameTuning.ArrivalDistance)
+        if (!nodeCompleted[nodeIndex] && Vector2.Distance(flat, target) <= GameTuning.NodeArrivalDistance)
+            BeginSpinning();
+    }
+
+    private float CalculateShakeIntensity(float speed, Vector3 position, ControllerState input)
+    {
+        float speedContribution = Mathf.Clamp01(speed / GameTuning.ShakeSpeedNormalization) *
+            GameTuning.ShakeSpeedCoefficient;
+        float roughnessMultiplier = GameTuning.ShakeNormalMultiplier;
+        for (int i = 0; i < GameTuning.RoughnessAreas.Length; i++)
         {
-            phase = Phase.Spinning;
-            progress = 0f;
-            spinCommandIndex = 0;
-            spinCommandTimer = 0f;
-            SetSpinInstruction();
+            Vector4 area = GameTuning.RoughnessAreas[i];
+            if (Mathf.Abs(position.x - area.x) <= area.z && Mathf.Abs(position.z - area.y) <= area.w)
+            {
+                roughnessMultiplier = GameTuning.ShakeRoughnessMultiplier;
+                break;
+            }
         }
+        float inputContribution = Mathf.Clamp01(input.ShakeIntensity) * GameTuning.ShakeInputCoefficient;
+        float impactContribution = 0f;
+        if (sliderBlock != null)
+        {
+            Vector3 sliderPosition = sliderBlock.position;
+            if (Mathf.Abs(position.x - sliderPosition.x) <= GameTuning.SliderImpactHalfX &&
+                Mathf.Abs(position.z - sliderPosition.z) <= GameTuning.SliderImpactHalfZ)
+                impactContribution = GameTuning.ShakeSliderImpact;
+        }
+        return Mathf.Clamp01(speedContribution * roughnessMultiplier + inputContribution + impactContribution);
+    }
+
+    private void UpdateSleep(ControllerState input, float deltaTime, float currentShake)
+    {
+        if (!sleepEnabled) return;
+        bool quiet = input.Tilt.magnitude < GameTuning.SleepQuietTiltThreshold &&
+            currentShake < GameTuning.SleepQuietShakeThreshold;
+        if (awake)
+        {
+            if (awakeTimer > 0f) return;
+            if (quiet)
+            {
+                sleepDepth = Mathf.Min(GameTuning.SleepMaximum,
+                    sleepDepth + GameTuning.SleepRecoveryRate * deltaTime);
+                if (sleepDepth >= GameTuning.SleepReentryDepth) awake = false;
+            }
+            return;
+        }
+
+        if (quiet)
+            sleepDepth = Mathf.Min(GameTuning.SleepMaximum,
+                sleepDepth + GameTuning.SleepRecoveryRate * deltaTime);
+        else
+            sleepDepth = Mathf.Max(0f, sleepDepth - currentShake * GameTuning.SleepLossRate * deltaTime);
+        if (GameTuning.SleepTimeDecayRate > 0f)
+            sleepDepth = Mathf.Max(0f, sleepDepth - GameTuning.SleepTimeDecayRate * deltaTime);
+        if (sleepDepth <= GameTuning.SleepWakeThreshold)
+        {
+            awake = true;
+            awakeTimer = GameTuning.AwakeDuration;
+            charge *= 1f - GameTuning.ChargeWakeSpillRatio;
+        }
+    }
+
+    private void BeginSpinning()
+    {
+        phase = Phase.Spinning;
+        float completion = GameTuning.NodeCompletionDegrees[nodeIndex];
+        float carryCharge = charge;
+        progress = nodeIndex == 0 && !sleepEnabled
+            ? 0f
+            : completion * carryCharge * GameTuning.ChargeCarryConversion;
+        charge = 0f;
+        progress = Mathf.Clamp(progress, 0f, completion);
+        ApplySpinProgressVisuals();
+        spinCommandIndex = 0;
+        spinCommandTimer = 0f;
+        SetSpinInstruction();
+    }
+
+    private void ApplySpinProgressVisuals()
+    {
+        float completion = GameTuning.NodeCompletionDegrees[nodeIndex];
+        float ratio = Mathf.Clamp01(progress / completion);
+        Transform screw = screws[nodeIndex];
+        Vector3 screwBase = screwBasePositions[nodeIndex];
+        screw.position = new Vector3(screwBase.x,
+            screwBase.y + ratio * GameTuning.NodeMaxScrewRise[nodeIndex], screwBase.z);
+        Transform door = doors[nodeIndex];
+        Vector3 doorBase = doorBasePositions[nodeIndex];
+        door.position = new Vector3(doorBase.x, doorBase.y + ratio * GameTuning.DoorOpenHeight, doorBase.z);
     }
 
     // 歩ける範囲 (レーンと区画と折り返し) の中かどうか。
@@ -430,7 +503,11 @@ public sealed class KairoGame : MonoBehaviour
         if (input.RotationDirection == requiredDirection && correctSpeed)
         {
             float completion = GameTuning.NodeCompletionDegrees[nodeIndex];
+            float previousCharge = charge;
             progress = Mathf.Min(completion, progress + Mathf.Abs(input.RotationDeltaDegrees));
+            charge = Mathf.Clamp01(progress / completion);
+            if (previousCharge < 1f && charge >= 1f)
+                flashUntil = Time.time + GameTuning.BallFlashDuration;
             float ratio = progress / completion;
             Transform screw = screws[nodeIndex];
             Vector3 screwBase = screwBasePositions[nodeIndex];
@@ -441,7 +518,7 @@ public sealed class KairoGame : MonoBehaviour
             // この地点のドアは、この地点の進み具合で上がる。開いたドアは開いたまま。
             Transform door = doors[nodeIndex];
             Vector3 doorBase = doorBasePositions[nodeIndex];
-            door.position = new Vector3(doorBase.x, doorBase.y + ratio * 2.3f, doorBase.z);
+            door.position = new Vector3(doorBase.x, doorBase.y + ratio * GameTuning.DoorOpenHeight, doorBase.z);
             SetSpinInstruction();
             if (progress >= completion)
             {
@@ -460,6 +537,11 @@ public sealed class KairoGame : MonoBehaviour
     {
         PlaySuccess();
         nodeCompleted[nodeIndex] = true;
+        sleepEnabled = true;
+        sleepDepth = Mathf.Clamp01(GameTuning.NodeCompletionDegrees[nodeIndex] / GameTuning.SleepInitialReferenceDegrees) * GameTuning.SleepMaximum;
+        awake = false;
+        awakeTimer = 0f;
+        charge = 1f;
         SetRouteColor(nodeIndex, new Color(0.1f, 0.75f, 1f));
         if (nodeIndex == GameTuning.SpinNodeCount - 1)
         {
@@ -490,7 +572,7 @@ public sealed class KairoGame : MonoBehaviour
             doorRenderer.material.EnableKeyword("_EMISSION");
             doorRenderer.material.SetColor("_EmissionColor", new Color(0.1f, 0.5f, 0.65f));
         }
-        SetInstruction($"ゴール！ クリア！  タイム {Time.time - gameStartTime:0.0} 秒  •  粒 {collectedCount}/{GameTuning.ChargeParticlePositions.Length}  •  R で最初から");
+        SetInstruction($"ゴール！ クリア！  タイム {Time.time - gameStartTime:0.0} 秒  •  R で最初から");
     }
 
     private void UpdateBall(ControllerState input)
@@ -520,7 +602,7 @@ public sealed class KairoGame : MonoBehaviour
 
     private void SetCarryingInstruction()
     {
-        SetInstruction("傾けて運ぶ  •  矢印キー / 傾け  •  振る / Space でジャンプ  •  拍に合わせると充電アップ");
+        SetInstruction("傾けてそっと運ぶ  •  矢印キー / 傾け  •  A / D・マウスでネジ回転");
     }
 
     private void SetSpinInstruction()
@@ -540,39 +622,12 @@ public sealed class KairoGame : MonoBehaviour
     private int CurrentSpinDirection() => spinCommandIndex < 2 ? 1 : -1;
     private bool CurrentSpinRequiresFast() => spinCommandIndex == 0 || spinCommandIndex == 3;
     private static string DirectionLabel(int direction) => direction > 0 ? "右回り" : "左回り";
-    private bool IsOnBeat() => Mathf.Repeat(Time.time, GameTuning.BeatIntervalSeconds) < GameTuning.BeatWindowSeconds;
-
-    private void AddCharge(float amount)
-    {
-        float oldCharge = charge;
-        charge = Mathf.Clamp01(charge + amount);
-        if (oldCharge < 1f && charge >= 1f) flashUntil = Time.time + GameTuning.BallFlashDuration;
-    }
-
-    private void CollectChargeParticles()
-    {
-        for (int i = 0; i < chargeParticles.Length; i++)
-        {
-            Transform particle = chargeParticles[i];
-            if (particle == null) continue;
-            Vector2 delta = new Vector2(particle.position.x - hara.position.x,
-                particle.position.z - hara.position.z);
-            if (delta.magnitude > 0.55f) continue;
-            AddCharge(GameTuning.ChargePerParticle);
-            collectedCount++;
-            pickupFlashUntil = Time.time + 0.25f;
-            Destroy(particle.gameObject);
-            chargeParticles[i] = null;
-        }
-    }
-
     private void UpdateBallChargeVisual()
     {
         if (ballMaterial == null) return;
         bool fullyCharged = charge >= 1f;
         Color color = fullyCharged ? GameTuning.BallFullChargeColor : GameTuning.BallChargeColor;
         float emission = GameTuning.BallBaseEmission + charge * GameTuning.BallChargeEmission;
-        if (Time.time < pickupFlashUntil) emission = Mathf.Max(emission, 1.6f);
         if (fullyCharged && Time.time < flashUntil) emission = GameTuning.BallFullChargeFlashEmission;
         // テクスチャのあるモデル (球の FBX) では地の色を塗り替えない。
         // 光り方は発光の強さと、満ちたときの発光色の切り替わりで出す。
@@ -589,6 +644,32 @@ public sealed class KairoGame : MonoBehaviour
         }
     }
 
+    private void UpdateSleepVisual()
+    {
+        if (sleepText == null) return;
+        if (!sleepEnabled || phase != Phase.Carrying)
+        {
+            sleepText.enabled = false;
+            sleepText.text = string.Empty;
+            return;
+        }
+        if (awake)
+        {
+            sleepText.enabled = true;
+            sleepText.text = "◎";
+            return;
+        }
+        float depthRatio = Mathf.Clamp01(sleepDepth / GameTuning.SleepMaximum);
+        int count = Mathf.Clamp(Mathf.RoundToInt(Mathf.Lerp(GameTuning.SleepZMinCount,
+            GameTuning.SleepZMaxCount, depthRatio)), GameTuning.SleepZMinCount, GameTuning.SleepZMaxCount);
+        float interval = Mathf.Lerp(GameTuning.SleepZShallowInterval, GameTuning.SleepZDeepInterval, depthRatio);
+        bool visible = Mathf.Repeat(Time.time, interval) < interval * GameTuning.SleepZVisibleRatio;
+        sleepText.enabled = visible;
+        sleepText.fontSize = Mathf.Lerp(GameTuning.SleepZShallowFontSize, GameTuning.SleepZDeepFontSize, depthRatio);
+        string sleepGlyph = count == 1 ? "Z" : count == 2 ? "Zzz" : "Zzzz";
+        sleepText.text = sleepGlyph + (shakeIntensity > GameTuning.SleepQuietShakeThreshold ? "…" : "");
+    }
+
     private void SetSpinBarVisible(bool visible)
     {
         if (spinBarRoot != null) spinBarRoot.SetActive(visible);
@@ -598,12 +679,19 @@ public sealed class KairoGame : MonoBehaviour
     private void UpdateStatus()
     {
         if (chargeBar != null) chargeBar.fillAmount = charge;
+        if (sleepBar != null)
+        {
+            bool showSleepBar = sleepEnabled && phase == Phase.Carrying;
+            sleepBar.gameObject.SetActive(showSleepBar);
+            sleepBar.fillAmount = showSleepBar ? sleepDepth / GameTuning.SleepMaximum : 0f;
+        }
         if (spinBar != null) spinBar.fillAmount = progress / GameTuning.NodeCompletionDegrees[nodeIndex];
         SetSpinBarVisible(phase == Phase.Spinning);
         if (status == null) return;
-        string chargeLabel = $"チャージ {charge:P0}";
+        string chargeLabel = $"帯電 {charge:P0}";
+        string sleepLabel = sleepEnabled ? (awake ? "起きている" : $"眠り {sleepDepth / GameTuning.SleepMaximum:P0}") : "起きている";
         if (phase == Phase.Carrying)
-            status.text = $"スピン地点 {nodeIndex + 1}/{GameTuning.SpinNodeCount}   {chargeLabel}   {(IsOnBeat() ? "♪ BEAT" : "")}";
+            status.text = $"スピン地点 {nodeIndex + 1}/{GameTuning.SpinNodeCount}   {chargeLabel}   {sleepLabel}   揺れ {shakeIntensity:P0}";
         else if (phase == Phase.Spinning)
             status.text = $"スピン地点 {nodeIndex + 1}/{GameTuning.SpinNodeCount}   ネジ {progress / GameTuning.NodeCompletionDegrees[nodeIndex]:P0}   {chargeLabel}";
         else
