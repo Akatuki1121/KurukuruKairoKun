@@ -11,6 +11,65 @@ public static class GameTuning
     public const float TiltDeadZone = 0.12f;
     public const float InputDeadZone = 0.001f;
 
+    // 傾け歩行
+    public const float CarryMaximumSpeed = 2.0f;
+    public const float CarryMaximumTilt = 1.0f;
+    public const float CarryLeanDegrees = 10f;
+    public const float CarryLeanResponse = 10f;
+    public const float BallCarryOffsetX = 0.65f;
+    public const float BallCarryOffsetY = 0.7f;
+    public const float BallCarryFollowRate = 14f;
+    public const float BallSleepBobFrequency = 2.2f;
+    public const float BallSleepBobAmplitude = 0.035f;
+    public const float BallShakeVisualDegrees = 8f;
+    public const float BallShakeVisualResponse = 16f;
+    public const float DockArrivalOffsetX = 0.85f;
+    public const float GoalArrivalDistance = 0.75f;
+    public const float DoorOpenHeight = 2.3f;
+
+    // 眠り
+    public const float SleepMaximum = 100f;
+    public const float SleepInitialReferenceDegrees = 1080f;
+    public const float SleepLossRate = 20f;
+    public const float SleepRecoveryRate = 12f;
+    public const float SleepWakeThreshold = 0f;
+    public const float SleepReentryDepth = 15f;
+    public const float AwakeDuration = 3f;
+    public const float SleepQuietTiltThreshold = 0.1f;
+    public const float SleepQuietShakeThreshold = 0.08f;
+    public const float SleepTimeDecayRate = 0f;
+    public const int SleepZMinCount = 1;
+    public const int SleepZMaxCount = 3;
+    public const float SleepZShallowInterval = 0.65f;
+    public const float SleepZDeepInterval = 2.2f;
+    public const float SleepZVisibleRatio = 0.7f;
+    public const float SleepZShallowFontSize = 18f;
+    public const float SleepZDeepFontSize = 28f;
+
+    // 揺れ
+    public const float ShakeSpeedNormalization = 2.0f;
+    public const float ShakeSpeedCoefficient = 0.65f;
+    public const float ShakeNormalMultiplier = 1.0f;
+    public const float ShakeRoughnessMultiplier = 2.0f;
+    public const float ShakeInputCoefficient = 0.15f;
+    public const float ShakeSliderImpact = 0.5f;
+    public const float SliderImpactHalfX = 1.0f;
+    public const float SliderImpactHalfZ = 1.0f;
+    public static readonly Vector4[] RoughnessAreas =
+    {
+        // 通路1終端の短い区間 (仮置き)
+        new Vector4(-8f, -3.35f, 0.65f, 0.55f),
+        // 通路2中央の長い区間 (仮置き)
+        new Vector4(-4.4f, -4f, 2.8f, 0.65f)
+    };
+
+    // 帯電の持ち越し
+    public const float ChargeWakeSpillRatio = 0.25f;
+    public const float ChargeCarryConversion = 0.25f;
+    public const float DebugMouseShakePixelsPerSecond = 900f;
+    public const float SerialTiltChangeNormalization = 3.0f;
+    public const float SerialShakeFlagIntensity = 0.9f;
+
     public const float BeatIntervalSeconds = 0.8f;
     public const float BeatWindowSeconds = 0.16f;
     public const float ChargeRate = 0.025f;

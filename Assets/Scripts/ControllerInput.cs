@@ -8,6 +8,7 @@ public struct ControllerState
     public int RotationDirection;
     public Vector2 Tilt;
     public bool Shaken;
+    public float ShakeIntensity;
 }
 
 public interface IGameInput
@@ -28,13 +29,18 @@ public sealed class DebugGameInput : IGameInput
         }
 
         float wheelDelta = 0f;
+        float mouseShakeIntensity = 0f;
         if (Mouse.current != null)
         {
             if (Mouse.current.leftButton.isPressed) direction -= 1f;
             if (Mouse.current.rightButton.isPressed) direction += 1f;
             wheelDelta = Mouse.current.scroll.ReadValue().y * GameTuning.MouseWheelDegreesPerNotch;
+            Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+            float mouseSpeed = deltaTime > 0f ? mouseDelta.magnitude / deltaTime : 0f;
+            mouseShakeIntensity = Mathf.Clamp01(mouseSpeed / GameTuning.DebugMouseShakePixelsPerSecond);
         }
 
+        bool shaken = keyboard != null && keyboard.spaceKey.wasPressedThisFrame;
         bool slowRotation = keyboard != null && (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed);
         float debugSpeed = slowRotation ? GameTuning.DebugSlowRotationSpeed : GameTuning.DebugRotationSpeed;
         float keyboardSpeed = Mathf.Abs(direction) * debugSpeed;
@@ -52,7 +58,8 @@ public sealed class DebugGameInput : IGameInput
             RotationSpeedDegreesPerSecond = Mathf.Max(keyboardSpeed, wheelSpeed),
             RotationDirection = delta > 0f ? 1 : delta < 0f ? -1 : 0,
             Tilt = tilt,
-            Shaken = keyboard != null && keyboard.spaceKey.wasPressedThisFrame
+            Shaken = shaken,
+            ShakeIntensity = shaken ? 1f : mouseShakeIntensity
         };
     }
 }
