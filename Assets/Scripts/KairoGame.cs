@@ -35,6 +35,7 @@ public sealed partial class KairoGame : MonoBehaviour
     private GameObject spinBarRoot;
     private Transform cameraTransform;
     private Transform currentMarker;
+    private Transform[] roughnessMarkers;
     private Transform sliderBlock;
     private float gameStartTime;
     private AudioSource audioSource;
@@ -114,6 +115,10 @@ public sealed partial class KairoGame : MonoBehaviour
         if (sleepText == null)
             sleepText = GameObject.Find("SleepText")?.GetComponent<TextMeshProUGUI>();
         sliderBlock = FindChild(root, "Slider block");
+        roughnessMarkers = new Transform[GameTuning.RoughnessAreas.Length];
+        for (int i = 0; i < roughnessMarkers.Length; i++)
+            roughnessMarkers[i] = FindChild(root, "Roughness marker " + (i + 1));
+        LayoutRoughnessMarkers();
         ballRenderer = ball.GetComponentInChildren<Renderer>();
         if (ballRenderer != null)
         {
@@ -134,6 +139,28 @@ public sealed partial class KairoGame : MonoBehaviour
             if (child.name == name) return child;
         }
         return null;
+    }
+
+    // でこぼこ区間の予告表示の受け口。シーンに "Roughness marker N" があれば、
+    // 対応する区間の中心と半幅に合わせて置き直す。マーカーが無くても動く (null 許容)。
+    // マーカーは X・Z が 1 単位の平らな物として置く想定で、半幅の 2 倍を大きさにする。高さはシーン側の置き方を残す。
+    private void LayoutRoughnessMarkers()
+    {
+        if (roughnessMarkers == null) return;
+        for (int i = 0; i < roughnessMarkers.Length && i < GameTuning.RoughnessAreas.Length; i++)
+        {
+            Transform marker = roughnessMarkers[i];
+            if (marker == null) continue;
+            Vector4 area = GameTuning.RoughnessAreas[i];
+            Vector3 position = marker.position;
+            position.x = area.x;
+            position.z = area.y;
+            marker.position = position;
+            Vector3 scale = marker.localScale;
+            scale.x = area.z * 2f;
+            scale.z = area.w * 2f;
+            marker.localScale = scale;
+        }
     }
 
     private bool BindHud()

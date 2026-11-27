@@ -72,7 +72,8 @@ public sealed partial class KairoGame
 
         UpdateSleep(input, deltaTime, shakeIntensity);
 
-        // 加速帯と粒は残すが、運搬の自動移動および帯電加算源としては無効化する。
+        // 加速帯は撤去済み (調整値は削除、シーンの金の帯は残置)。粒の調整値は残すが、
+        // 運搬の自動移動や帯電加算には使わない。
 
         if (goalOpen)
         {

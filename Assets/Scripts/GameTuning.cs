@@ -57,10 +57,10 @@ public static class GameTuning
     public const float SliderImpactHalfZ = 1.0f;
     public static readonly Vector4[] RoughnessAreas =
     {
-        // 通路1終端の短い区間 (仮置き)
-        new Vector4(-8f, -3.35f, 0.65f, 0.55f),
-        // 通路2中央の長い区間 (仮置き)
-        new Vector4(-4.4f, -4f, 2.8f, 0.65f)
+        // 通路A終端の短い予告区間 (仮置き)。部屋2に近い側にだけ置く。
+        new Vector4(-2f, -4f, 0.65f, 0.65f),
+        // 通路B中央の本番区間 (仮置き)。通路B後半の歩行幅いっぱいに置き、まっすぐ抜けると必ず通る。
+        new Vector4(11.4f, -0.7f, 1.6f, 1.0f)
     };
 
     // 帯電の持ち越し
@@ -101,11 +101,16 @@ public static class GameTuning
     public static readonly float[] NodeInstructionDurations = { 1.8f, 1.3f, 1.8f };
     public static readonly float[] ArrivalSide = { 1f, 1f, 1f };
     // 舞台は回路図の形: 部品 (ネジ部屋) を配線 (通路) でつなぐ。
-    // 歩ける範囲は、部屋 4 つ (3 部屋とゴールの小部屋) と配線 4 本の矩形。
-    public static readonly float[] WalkAreaX = { -11.5f, 3.4f, 12.2f, 17.1f, -8f, -4.4f, 9.5f, 11.4f };
-    public static readonly float[] WalkAreaZ = { 4.8f, -5.4f, 5.6f, 5.6f, -1.6f, -4f, -3.4f, -0.7f };
-    public static readonly float[] WalkAreaHalfX = { 4.5f, 4.2f, 4f, 0.9f, 1.6f, 3.6f, 1.9f, 1.6f };
-    public static readonly float[] WalkAreaHalfZ = { 4f, 3.8f, 3.6f, 1.3f, 2.4f, 1.6f, 1.6f, 2.7f };
+    // 歩ける範囲は、部屋 4 つ (3 部屋とゴールの小部屋) と配線の矩形。
+    // 並び: 0-3 部屋1・部屋2・部屋3・ゴール小部屋、4-5 通路A前半・後半、
+    // 6-7 通路B前半・後半、8 通路C (部屋3とゴールの小部屋の間)、9-11 通路Bの迂回路 (南の連絡・東の脚・北の連絡)。
+    // InsideWalkArea は各矩形を四方 0.3 ずつ狭めて判定するため、端が接するだけの矩形同士は
+    // 0.6 の隙間ができて通れなくなる。通路側の矩形は部屋側へ 0.7 だけ食い込ませてあり、
+    // 狭めた後も 0.1 重なる (2026-11-27 の検証で、食い込ませ前は部屋1を出られなかった)。
+    public static readonly float[] WalkAreaX = { -11.5f, 3.4f, 12.2f, 17.1f, -8f, -4.05f, 9.15f, 11.4f, 16.2f, 12.55f, 14.05f, 12.55f };
+    public static readonly float[] WalkAreaZ = { 4.8f, -5.4f, 5.6f, 5.6f, -1.25f, -4f, -3.4f, -0.35f, 5.6f, -2.45f, -0.6f, 1.15f };
+    public static readonly float[] WalkAreaHalfX = { 4.5f, 4.2f, 4f, 0.9f, 1.6f, 3.95f, 2.25f, 1.6f, 0.7f, 2.45f, 0.95f, 2.45f };
+    public static readonly float[] WalkAreaHalfZ = { 4f, 3.8f, 3.6f, 1.3f, 2.75f, 1.6f, 1.6f, 3.05f, 1.3f, 0.65f, 2.5f, 0.75f };
     // ドア (各部屋の出口)。中心と、抜ける向き (ドアはその向きを塞ぐ)。
     public static readonly float[] DoorCenterX = { -8f, 7.6f, 16.2f };
     public static readonly float[] DoorCenterZ = { 0.8f, -3.4f, 5.6f };
@@ -121,22 +126,16 @@ public static class GameTuning
     public static readonly float[] PlatformHalfX = { 2.3f, 2.3f, 2.3f };
     public static readonly float[] PlatformHalfZ = { 2.3f, 2.3f, 2.3f };
     public static readonly float[] PlatformTop = { 0.38f, 0.38f, 0.38f };
-    // 配線 2 の上を横切る往復部品 (コンデンサ)。
+    // 配線 2 の上を横切る往復部品 (コンデンサ)。通路B後半の南側、でこぼこ地帯の手前 (部屋2側) に置く。
+    // 手前で待つ場所: 通路B前半の西側 (9, -3.4) あたりと、通路B前半の南縁 (11.4, -4.6) あたりは、
+    // コンデンサの往復範囲と衝突範囲に常時入らない。
     public const float SliderCenterX = 11.4f;
-    public const float SliderCenterZ = -0.7f;
+    public const float SliderCenterZ = -2.5f;
     public const float SliderDirX = 1f;
     public const float SliderDirZ = 0f;
     public const float SliderRange = 1.0f;
     public const float SliderSpeed = 0.9f;
     public const float SliderHalf = 0.55f;
-    // 加速帯 (配線の上の金の帯)。帯の上にいる間、配線の向きへ加速する。
-    public static readonly float[] BoostCenterX = { -8f, -5.5f, -2f, 9.5f, 11.4f, 11.4f };
-    public static readonly float[] BoostCenterZ = { -1.2f, -4f, -4f, -3.4f, -1.8f, 0.6f };
-    public static readonly float[] BoostDirX = { 0f, 1f, 1f, 1f, 0f, 0f };
-    public static readonly float[] BoostDirZ = { -1f, 0f, 0f, 0f, 1f, 1f };
-    public const float BoostHalfLength = 0.95f;
-    public const float BoostHalfWidth = 1.35f;
-    public const float BoostSpeed = 5.5f;
     // ゴールの小部屋の中心 (LED の場所)。
     public const float GoalX = 17.1f;
     public const float GoalZ = 5.6f;
