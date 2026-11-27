@@ -40,11 +40,14 @@ public sealed partial class KairoGame : MonoBehaviour
     private float gameStartTime;
     private AudioSource audioSource;
     private AudioClip spinTone;
+    private AudioClip stepTone;
     private AudioClip successTone;
     private Phase phase = Phase.Title;
     private int nodeIndex;
-    private int spinCommandIndex;
-    private float spinCommandTimer;
+    private int spinStepIndex;
+    private float spinStepDegrees;
+    private float spinStopTimer;
+    private bool spinStepOvershot;
     private float progress;
     private float charge;
     private float sleepDepth;

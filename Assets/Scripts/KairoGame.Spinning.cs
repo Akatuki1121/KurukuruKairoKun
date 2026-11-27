@@ -6,22 +6,64 @@ public sealed partial class KairoGame
     private void BeginSpinning()
     {
         phase = Phase.Spinning;
-        float completion = GameTuning.NodeCompletionDegrees[nodeIndex];
+        float completion = GameTuning.NodeTotalDegrees(nodeIndex);
         float carryCharge = charge;
-        progress = nodeIndex == 0 && !sleepEnabled
+        // 帯電の持ち越し: 残っていた帯電の分だけ、最初の要素の積算が進んだ状態で始める。
+        // 1 本目で眠りが未有効の時だけは 0 から。
+        spinStepIndex = 0;
+        spinStepDegrees = nodeIndex == 0 && !sleepEnabled
             ? 0f
             : completion * carryCharge * GameTuning.ChargeCarryConversion;
-        charge = 0f;
-        progress = Mathf.Clamp(progress, 0f, completion);
+        spinStopTimer = 0f;
+        spinStepOvershot = false;
+        // 先行分だけで最初の要素が完了の範囲に達する場合は、その要素は完了した状態で始める。
+        CompleteCarriedSteps();
+        RefreshSpinProgress();
         ApplySpinProgressVisuals();
-        spinCommandIndex = 0;
-        spinCommandTimer = 0f;
-        SetSpinInstruction();
+        if (spinStepIndex >= GameTuning.NodeCombinations[nodeIndex].Length)
+        {
+            // 先行分だけで組み合わせをすべて満たした場合は、そのままネジ完了へ。
+            CompleteNode();
+            return;
+        }
+        UpdateSpinInstruction();
+    }
+
+    // 帯電の持ち越しで要素が完了の範囲に達していたら、その要素を完了した状態にする。
+    // 余りは次の要素へは持ち越さない (先行分は、その要素の積算に充てる分まで)。
+    private void CompleteCarriedSteps()
+    {
+        GameTuning.SpinStep[] combination = GameTuning.NodeCombinations[nodeIndex];
+        while (spinStepIndex < combination.Length &&
+               spinStepDegrees >= combination[spinStepIndex].Degrees - GameTuning.SpinStepToleranceDegrees)
+        {
+            spinStepIndex++;
+            spinStepDegrees = 0f;
+        }
+    }
+
+    // ネジ全体の進捗と帯電を、組み合わせの進み具合から出し直す。
+    // 帯電は進捗率と一致する (完了時に最大)。
+    private void RefreshSpinProgress()
+    {
+        float completion = GameTuning.NodeTotalDegrees(nodeIndex);
+        progress = Mathf.Clamp(CompletedCombinationDegrees() + spinStepDegrees, 0f, completion);
+        charge = Mathf.Clamp01(progress / completion);
+    }
+
+    // 完了した要素の合計量。
+    private float CompletedCombinationDegrees()
+    {
+        float total = 0f;
+        GameTuning.SpinStep[] combination = GameTuning.NodeCombinations[nodeIndex];
+        for (int i = 0; i < spinStepIndex && i < combination.Length; i++)
+            total += combination[i].Degrees;
+        return total;
     }
 
     private void ApplySpinProgressVisuals()
     {
-        float completion = GameTuning.NodeCompletionDegrees[nodeIndex];
+        float completion = GameTuning.NodeTotalDegrees(nodeIndex);
         float ratio = Mathf.Clamp01(progress / completion);
         Transform screw = screws[nodeIndex];
         Vector3 screwBase = screwBasePositions[nodeIndex];
@@ -39,63 +81,87 @@ public sealed partial class KairoGame
         Vector3 dockTarget = docks[nodeIndex].position + Vector3.up * 0.48f;
         ball.position = Vector3.Lerp(ball.position, dockTarget, 1f - Mathf.Exp(-12f * deltaTime));
 
-        spinCommandTimer += deltaTime;
-        float instructionDuration = GameTuning.NodeInstructionDurations[nodeIndex];
-        while (spinCommandTimer >= instructionDuration)
-        {
-            spinCommandTimer -= instructionDuration;
-            spinCommandIndex = (spinCommandIndex + 1) % 4;
-            SetSpinInstruction();
-        }
+        GameTuning.SpinStep step = GameTuning.NodeCombinations[nodeIndex][spinStepIndex];
+        float completion = GameTuning.NodeTotalDegrees(nodeIndex);
 
-        // 逆ネジの地点では、指示の向きが通常と反対になる。
-        int requiredDirection = CurrentSpinDirection() * GameTuning.NodeDirectionSign[nodeIndex];
-        float speed = input.RotationSpeedDegreesPerSecond;
-        bool correctSpeed = CurrentSpinRequiresFast()
-            ? speed >= GameTuning.FastRotationMinimum
-            : speed >= GameTuning.SlowRotationMinimum && speed <= GameTuning.SlowRotationMaximum;
-        if (input.RotationDirection == requiredDirection && correctSpeed)
+        // 今の要素の向きに回した量だけを積算する。逆向きは積算しない。
+        if (input.RotationDirection == step.Direction)
         {
-            float completion = GameTuning.NodeCompletionDegrees[nodeIndex];
-            float previousCharge = charge;
-            progress = Mathf.Min(completion, progress + Mathf.Abs(input.RotationDeltaDegrees));
-            charge = Mathf.Clamp01(progress / completion);
-            if (previousCharge < 1f && charge >= 1f)
-                flashUntil = Time.time + GameTuning.BallFlashDuration;
+            spinStepDegrees += Mathf.Abs(input.RotationDeltaDegrees);
+            spinStepOvershot = false;
+            RefreshSpinProgress();
             float ratio = progress / completion;
             Transform screw = screws[nodeIndex];
             Vector3 screwBase = screwBasePositions[nodeIndex];
             screw.position = new Vector3(screwBase.x,
                 screwBase.y + ratio * GameTuning.NodeMaxScrewRise[nodeIndex], screwBase.z);
+            // 逆ネジの地点では、ネジの見た目の回転方向が入力と反対になる。
             screw.Rotate(Vector3.up,
                 input.RotationDeltaDegrees * 0.35f * GameTuning.NodeDirectionSign[nodeIndex], Space.World);
             // この地点のドアは、この地点の進み具合で上がる。開いたドアは開いたまま。
             Transform door = doors[nodeIndex];
             Vector3 doorBase = doorBasePositions[nodeIndex];
             door.position = new Vector3(doorBase.x, doorBase.y + ratio * GameTuning.DoorOpenHeight, doorBase.z);
-            SetSpinInstruction();
-            if (progress >= completion)
-            {
-                CompleteNode();
-                return;
-            }
         }
 
-        if (input.RotationDirection != 0 && input.RotationDirection != requiredDirection)
-            SetInstruction(CurrentSpinInstruction("逆向きに回そう"));
-        else if (input.RotationDirection != 0 && !correctSpeed)
-            SetInstruction(CurrentSpinInstruction("速さを合わせて回そう"));
+        // 目標量＋許容幅を超えて回しすぎたら、その要素の積算だけを 0 に戻してやり直しにする。
+        // 完了した要素と組み合わせ全体は戻さない。
+        if (spinStepDegrees > step.Degrees + GameTuning.SpinStepToleranceDegrees)
+        {
+            spinStepDegrees = 0f;
+            spinStepOvershot = true;
+            spinStopTimer = 0f;
+            RefreshSpinProgress();
+        }
+
+        // 目標量から許容幅以内まで回した状態で止まったら、その要素は完了。
+        if (spinStepDegrees >= step.Degrees - GameTuning.SpinStepToleranceDegrees)
+        {
+            if (input.RotationSpeedDegreesPerSecond < GameTuning.SpinStopSpeedThreshold)
+                spinStopTimer += deltaTime;
+            else
+                spinStopTimer = 0f;
+            if (spinStopTimer >= GameTuning.SpinStopHoldSeconds)
+            {
+                CompleteSpinStep();
+                if (phase != Phase.Spinning) return;
+            }
+        }
+        else
+        {
+            spinStopTimer = 0f;
+        }
+
+        UpdateSpinInstruction(input);
+    }
+
+    // 今の要素が完了した。次の要素へ進み、最後の要素ならネジの完了へつなぐ。
+    private void CompleteSpinStep()
+    {
+        PlayStep();
+        spinStepIndex++;
+        spinStepDegrees = 0f;
+        spinStopTimer = 0f;
+        spinStepOvershot = false;
+        RefreshSpinProgress();
+        if (spinStepIndex >= GameTuning.NodeCombinations[nodeIndex].Length)
+            CompleteNode();
     }
 
     private void CompleteNode()
     {
         PlaySuccess();
+        flashUntil = Time.time + GameTuning.BallFlashDuration;
         nodeCompleted[nodeIndex] = true;
         sleepEnabled = true;
-        sleepDepth = Mathf.Clamp01(GameTuning.NodeCompletionDegrees[nodeIndex] / GameTuning.SleepInitialReferenceDegrees) * GameTuning.SleepMaximum;
+        sleepDepth = Mathf.Clamp01(GameTuning.NodeTotalDegrees(nodeIndex) / GameTuning.SleepInitialReferenceDegrees) * GameTuning.SleepMaximum;
         awake = false;
         awakeTimer = 0f;
         charge = 1f;
+        spinStepIndex = 0;
+        spinStepDegrees = 0f;
+        spinStopTimer = 0f;
+        spinStepOvershot = false;
         SetRouteColor(nodeIndex, new Color(0.1f, 0.75f, 1f));
         if (nodeIndex == GameTuning.SpinNodeCount - 1)
         {
@@ -109,8 +175,6 @@ public sealed partial class KairoGame
         nodeIndex++;
         phase = Phase.Carrying;
         progress = 0f;
-        spinCommandIndex = 0;
-        spinCommandTimer = 0f;
         SetCarryingInstruction();
     }
 
@@ -134,21 +198,23 @@ public sealed partial class KairoGame
         SetInstruction("傾けてそっと運ぶ  •  矢印キー / 傾け  •  A / D・マウスでネジ回転");
     }
 
-    private void SetSpinInstruction()
+    // 次に回す向きと残り回数、組み合わせ全体のうち何番目の要素かを、常に見える形にする。
+    // 回しすぎた時と逆向きに回した時の注意も、ここで出す。
+    private void UpdateSpinInstruction(ControllerState input = default)
     {
-        SetInstruction(CurrentSpinInstruction("スピンネジを回そう"));
+        GameTuning.SpinStep step = GameTuning.NodeCombinations[nodeIndex][spinStepIndex];
+        float remainingRotations = Mathf.Max(0f, step.Degrees - spinStepDegrees) / GameTuning.DegreesPerRotation;
+        string prefix;
+        if (input.RotationDirection != 0 && input.RotationDirection != step.Direction)
+            prefix = "逆向きに回そう";
+        else if (spinStepOvershot)
+            prefix = "回しすぎた！ もう一度";
+        else if (spinStepDegrees >= step.Degrees - GameTuning.SpinStepToleranceDegrees)
+            prefix = "止まって決めよう";
+        else
+            prefix = "スピンネジを回そう";
+        SetInstruction($"{prefix}  •  {DirectionLabel(step.Direction)} あと {remainingRotations:0.0} 回転  •  {spinStepIndex + 1}/{GameTuning.NodeCombinations[nodeIndex].Length}  •  A / D・マウスボタン  •  ホイールで微調整");
     }
 
-    private string CurrentSpinInstruction(string prefix)
-    {
-        string speedLabel = CurrentSpinRequiresFast() ? "速く" : "ゆっくり";
-        string controlHint = "A / D・マウスボタン";
-        if (!CurrentSpinRequiresFast()) controlHint += "  •  Shift + A / D / マウスボタン";
-        int direction = CurrentSpinDirection() * GameTuning.NodeDirectionSign[nodeIndex];
-        return $"{prefix}  •  {speedLabel} / {DirectionLabel(direction)}  •  {controlHint}";
-    }
-
-    private int CurrentSpinDirection() => spinCommandIndex < 2 ? 1 : -1;
-    private bool CurrentSpinRequiresFast() => spinCommandIndex == 0 || spinCommandIndex == 3;
     private static string DirectionLabel(int direction) => direction > 0 ? "右回り" : "左回り";
 }

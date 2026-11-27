@@ -1,5 +1,17 @@
 using UnityEngine;
 
+// 金庫式スピンの組み合わせの 1 要素: プレイヤーが入力する向きと、その向きに回す目標量。
+public readonly struct SpinStep
+{
+    public readonly int Direction;
+    public readonly float Degrees;
+    public SpinStep(int direction, float degrees)
+    {
+        Direction = direction;
+        Degrees = degrees;
+    }
+}
+
 public static class GameTuning
 {
     public const int SpinNodeCount = 3;
@@ -80,12 +92,14 @@ public static class GameTuning
     public const float DebugRotationSpeed = 240f;
     public const float DebugSlowRotationSpeed = 60f;
     public const float MouseWheelDegreesPerNotch = 6f;
-    public const float FastRotationMinimum = 180f;
-    public const float SlowRotationMinimum = 30f;
-    public const float SlowRotationMaximum = 120f;
-    public const float SpinInstructionDuration = 1.8f;
-    public const float CompletionRotationDegrees = 720f;
-    public const float MaxScrewRise = 1.65f;
+    // 金庫式の要素の完了: 目標量から許容幅以内まで回した状態で、止まること。
+    public const float SpinStepToleranceDegrees = 30f;
+    // 止まることの判定: 回転速度がこのしきい値未満の状態が、この時間続いたこと。
+    // しきい値はデバッグのゆっくり回転 (60度/秒) より小さくしてある。
+    public const float SpinStopSpeedThreshold = 30f;
+    public const float SpinStopHoldSeconds = 0.25f;
+    // 回転数の表示 (度→回転) の換算。
+    public const float DegreesPerRotation = 360f;
 
     public const float BallRadius = 0.42f;
     public const float BallBaseEmission = 0.08f;
@@ -94,11 +108,26 @@ public static class GameTuning
     public const float BallFlashDuration = 0.12f;
     public static readonly Color BallChargeColor = new Color(0.05f, 0.42f, 0.95f);
     public static readonly Color BallFullChargeColor = new Color(0.35f, 0.9f, 1f);
-    // ネジごとの挙動: 必要な回転量、向きの反転 (逆ネジ)、上がる高さ、指示の切り替わり間隔
-    public static readonly float[] NodeCompletionDegrees = { 720f, 1080f, 720f };
+    // スピン (金庫式) の組み合わせ: 入力する向き (+1 右回り / -1 左回り) と目標回転量 (度) の並び。
+    // 合計量は現行の必要回転量 (金720・銅1080・鋼720) と一致させる。
+    // 金 (基本形): 右360 → 左180 → 右180。銅 (山場): 右360 → 左360 → 右180 → 左180。
+    // 鋼 (向きの変化): 左360 → 右180 → 左180。
+    public static readonly SpinStep[][] NodeCombinations =
+    {
+        new[] { new SpinStep(1, 360f), new SpinStep(-1, 180f), new SpinStep(1, 180f) },
+        new[] { new SpinStep(1, 360f), new SpinStep(-1, 360f), new SpinStep(1, 180f), new SpinStep(-1, 180f) },
+        new[] { new SpinStep(-1, 360f), new SpinStep(1, 180f), new SpinStep(-1, 180f) }
+    };
+    // ネジの必要回転量の合計。組み合わせの合計から出す (二重管理しない)。
+    public static float NodeTotalDegrees(int nodeIndex)
+    {
+        float total = 0f;
+        foreach (SpinStep step in NodeCombinations[nodeIndex]) total += step.Degrees;
+        return total;
+    }
+    // ネジごとの挙動: 見た目の回転方向の反転 (逆ネジ)、上がる高さ
     public static readonly int[] NodeDirectionSign = { 1, 1, -1 };
     public static readonly float[] NodeMaxScrewRise = { 1.65f, 2.1f, 1.65f };
-    public static readonly float[] NodeInstructionDurations = { 1.8f, 1.3f, 1.8f };
     public static readonly float[] ArrivalSide = { 1f, 1f, 1f };
     // 舞台は回路図の形: 部品 (ネジ部屋) を配線 (通路) でつなぐ。
     // 歩ける範囲は、部屋 4 つ (3 部屋とゴールの小部屋) と配線の矩形。

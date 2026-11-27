@@ -12,6 +12,7 @@ public sealed partial class KairoGame
         audioSource.playOnAwake = false;
         audioSource.loop = false;
         spinTone = CreateTone(220f, 0.11f);
+        stepTone = CreateTone(440f, 0.08f);
         successTone = CreateTone(660f, 0.28f);
     }
     // カメラは原ゼミちゃんの動きに少しだけついていく。
@@ -64,6 +65,13 @@ public sealed partial class KairoGame
     {
         if (audioSource != null && successTone != null) audioSource.PlayOneShot(successTone);
     }
+
+    // 金庫式の要素が 1 つ完了した時の、小さな手応えの音。完了時の成功音とは別の音。
+    private void PlayStep()
+    {
+        if (audioSource != null && stepTone != null) audioSource.PlayOneShot(stepTone);
+    }
+
     private void UpdateBallChargeVisual()
     {
         if (ballMaterial == null) return;
@@ -127,7 +135,7 @@ public sealed partial class KairoGame
             sleepBar.gameObject.SetActive(showSleepBar);
             sleepBar.fillAmount = showSleepBar ? sleepDepth / GameTuning.SleepMaximum : 0f;
         }
-        if (spinBar != null) spinBar.fillAmount = progress / GameTuning.NodeCompletionDegrees[nodeIndex];
+        if (spinBar != null) spinBar.fillAmount = progress / GameTuning.NodeTotalDegrees(nodeIndex);
         SetSpinBarVisible(phase == Phase.Spinning);
         if (status == null) return;
         string chargeLabel = $"帯電 {charge:P0}";
@@ -135,7 +143,7 @@ public sealed partial class KairoGame
         if (phase == Phase.Carrying)
             status.text = $"スピン地点 {nodeIndex + 1}/{GameTuning.SpinNodeCount}   {chargeLabel}   {sleepLabel}   揺れ {shakeIntensity:P0}";
         else if (phase == Phase.Spinning)
-            status.text = $"スピン地点 {nodeIndex + 1}/{GameTuning.SpinNodeCount}   ネジ {progress / GameTuning.NodeCompletionDegrees[nodeIndex]:P0}   {chargeLabel}";
+            status.text = $"スピン地点 {nodeIndex + 1}/{GameTuning.SpinNodeCount}   ネジ {progress / GameTuning.NodeTotalDegrees(nodeIndex):P0}   {chargeLabel}";
         else
             status.text = $"CLEAR   {chargeLabel}";
     }
