@@ -33,7 +33,7 @@ public sealed partial class KairoGame
     // 余りは次の要素へは持ち越さない (先行分は、その要素の積算に充てる分まで)。
     private void CompleteCarriedSteps()
     {
-        GameTuning.SpinStep[] combination = GameTuning.NodeCombinations[nodeIndex];
+        SpinStep[] combination = GameTuning.NodeCombinations[nodeIndex];
         while (spinStepIndex < combination.Length &&
                spinStepDegrees >= combination[spinStepIndex].Degrees - GameTuning.SpinStepToleranceDegrees)
         {
@@ -55,7 +55,7 @@ public sealed partial class KairoGame
     private float CompletedCombinationDegrees()
     {
         float total = 0f;
-        GameTuning.SpinStep[] combination = GameTuning.NodeCombinations[nodeIndex];
+        SpinStep[] combination = GameTuning.NodeCombinations[nodeIndex];
         for (int i = 0; i < spinStepIndex && i < combination.Length; i++)
             total += combination[i].Degrees;
         return total;
@@ -81,7 +81,7 @@ public sealed partial class KairoGame
         Vector3 dockTarget = docks[nodeIndex].position + Vector3.up * 0.48f;
         ball.position = Vector3.Lerp(ball.position, dockTarget, 1f - Mathf.Exp(-12f * deltaTime));
 
-        GameTuning.SpinStep step = GameTuning.NodeCombinations[nodeIndex][spinStepIndex];
+        SpinStep step = GameTuning.NodeCombinations[nodeIndex][spinStepIndex];
         float completion = GameTuning.NodeTotalDegrees(nodeIndex);
 
         // 今の要素の向きに回した量だけを積算する。逆向きは積算しない。
@@ -202,7 +202,7 @@ public sealed partial class KairoGame
     // 回しすぎた時と逆向きに回した時の注意も、ここで出す。
     private void UpdateSpinInstruction(ControllerState input = default)
     {
-        GameTuning.SpinStep step = GameTuning.NodeCombinations[nodeIndex][spinStepIndex];
+        SpinStep step = GameTuning.NodeCombinations[nodeIndex][spinStepIndex];
         float remainingRotations = Mathf.Max(0f, step.Degrees - spinStepDegrees) / GameTuning.DegreesPerRotation;
         string prefix;
         if (input.RotationDirection != 0 && input.RotationDirection != step.Direction)
